@@ -1,8 +1,6 @@
-package com.iremkoc.user_management_system.entities;
+package com.iremkoc.user_management_system.entities.concretes;
 
 import java.util.List;
-
-import com.iremkoc.user_management_system.entities.concretes.Review;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,4 +35,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews;
+
+    @Column(nullable = false)
+    private String role;
 }

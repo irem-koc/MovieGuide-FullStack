@@ -1,8 +1,5 @@
 package com.iremkoc.user_management_system.entities.concretes;
 
-import com.iremkoc.user_management_system.entities.Movie;
-import com.iremkoc.user_management_system.entities.User;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

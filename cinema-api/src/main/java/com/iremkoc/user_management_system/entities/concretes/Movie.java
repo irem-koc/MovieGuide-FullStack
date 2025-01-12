@@ -1,8 +1,6 @@
-package com.iremkoc.user_management_system.entities;
+package com.iremkoc.user_management_system.entities.concretes;
 
 import java.util.List;
-
-import com.iremkoc.user_management_system.entities.concretes.Review;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
