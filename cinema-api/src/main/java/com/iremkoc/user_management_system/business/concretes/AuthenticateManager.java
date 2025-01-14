@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.iremkoc.user_management_system.business.abstracts.AuthenticateService;
 import com.iremkoc.user_management_system.business.requests.LoginRequest;
+import com.iremkoc.user_management_system.business.requests.RegisterRequest;
 import com.iremkoc.user_management_system.config.concretes.JwtService;
 import com.iremkoc.user_management_system.core.utilities.exceptions.BusinessException;
 import com.iremkoc.user_management_system.dataAccess.abstracts.UserRepository;
@@ -29,18 +30,18 @@ public class AuthenticateManager implements AuthenticateService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Response register(User user) {
+    public Response register(RegisterRequest registerRequest) {
         Response response = new Response();
         try {
-            if (user.getRole() == null || user.getRole().isBlank()) {
-                user.setRole("USER");
+            if (registerRequest.getRole() == null || registerRequest.getRole().isBlank()) {
+                registerRequest.setRole("USER");
             }
-            if (userRepository.existsByEmail(user.getEmail())) {
-                throw new BusinessException(user.getEmail() + " already exists");
+            if (userRepository.existsByEmail(registerRequest.getEmail())) {
+                throw new BusinessException(registerRequest.getEmail() + " already exists");
             }
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            User savedUser = userRepository.save(user);
-            response.setUser(savedUser);
+            userRepository.save(User.builder().email(registerRequest.getEmail())
+                    .password(passwordEncoder.encode(registerRequest.getPassword())).role(registerRequest.getRole())
+                    .username(registerRequest.getUsername()).build());
             response.setStatusCode(200);
             response.setMessage("Successfully registered");
         } catch (BusinessException e) {
