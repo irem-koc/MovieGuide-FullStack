@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.iremkoc.user_management_system.business.concretes.AuthenticateManager;
 import com.iremkoc.user_management_system.business.requests.LoginRequest;
+import com.iremkoc.user_management_system.business.requests.RegisterRequest;
 import com.iremkoc.user_management_system.entities.concretes.Response;
-import com.iremkoc.user_management_system.entities.concretes.User;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -19,8 +19,8 @@ public class AuthController {
     private AuthenticateManager authenticateManager;
 
     @PostMapping("/register")
-    public ResponseEntity<Response> register(@RequestBody User user) {
-        Response response = authenticateManager.register(user);
+    public ResponseEntity<Response> register(@RequestBody RegisterRequest registerRequest) {
+        Response response = authenticateManager.register(registerRequest);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
